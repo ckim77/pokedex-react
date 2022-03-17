@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-// import axios from 'axios';
+import poke from "./poke.png";
 
 function App() {
   const [pokemon, setPokemon] = useState('pikachu');
@@ -36,15 +36,17 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Pokedex</h1>
+      <img className = "logo" src={poke} />
       <form>
         <input 
-          placeholder = "Enter pokemon name"
+          className = "entry-box"
+          placeholder = "Pokemon name"
           type = 'text'
           onChange = {handleChange}
         />
 
         <input
+          className = "submit-btn"
           type = "submit"
           onClick = {handleSubmit}
         />
@@ -53,10 +55,12 @@ function App() {
         return (
           <div>
             <img src = {data.sprites.front_default} />
-            <h3>{data.types[0].type.name}</h3>
-            <h3>{Math.round(data.height * 3.9)}</h3>
-            <h3>{Math.round(data.weight / 4.3)}</h3>
-            <h3>{data.id}</h3>
+          <div className = 'poke-info'>
+            <h3>Type: {data.types[0].type.name}</h3>
+            <h3>Height: {Math.round(data.height * 3.9)} inches</h3>
+            <h3>Weight: {Math.round(data.weight / 4.3)} lbs</h3>
+            <h3>Poke-ID: {data.id}</h3>
+          </div>
           </div>
         )
       })}
